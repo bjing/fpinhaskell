@@ -19,6 +19,7 @@ drop1 (x:xs) n = drop1 xs (n-1)
 
 -- 3.5
 dropWhile1 :: [a] -> (a -> Bool) -> [a]
+dropWhile1 [] p = []
 dropWhile1 (x:xs) p = if p x then dropWhile1 xs p else x:xs
 
 -- 3.6
