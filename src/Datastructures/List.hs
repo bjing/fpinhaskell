@@ -60,7 +60,8 @@ reverseFold = foldl (flip (:)) []
 -- foldLeftViaFoldRight is too hard, can't do
 
 -- 3.14
---appendFold ::
+appendFold :: [a] -> [a] -> [a]
+appendFold xs ys = reverseFold $ foldLeft ys (reverseFold xs) (flip(:))
 
 -- 3.15
 concatViaFold :: [[a]] -> [a]
@@ -80,6 +81,7 @@ doubleToString = fmap show
 
 -- 3.18
 map1 :: (a -> b) -> [a] -> [b]
+map1 f [] = []
 map1 f (x:xs) = f x : map1 f xs
 
 -- 3.19

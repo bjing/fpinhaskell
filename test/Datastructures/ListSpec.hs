@@ -45,8 +45,56 @@ spec = do
     it "should handle empty list" $ do
       product1 [] `shouldBe` 1
 
-  describe "" $ do
+  describe "length" $ do
     it "should work for non-empty list" $ do
       length1 [1..4] `shouldBe` 4
     it "should work for empty list" $ do
       length1 [] `shouldBe` 0
+
+  describe "foldLeft" $ do
+    it "can handle large lists" $ do
+      foldLeft [1..2000000] 0 (+) `shouldBe` sum [1..2000000]
+
+  describe "sumFoldLeft" $ do
+    it "should sum list items using foldLeft" $ do
+      sumFoldLeft [1..2000000] `shouldBe` foldLeft [1..2000000] 0 (+)
+
+  describe "productFoldLeft" $ do
+    it "should multiply list items using foldLeft" $ do
+      productFoldLeft [1..200] `shouldBe` foldLeft [1..200] 1 (*)
+
+  describe "lengthFoldLeft" $ do
+    it "should length of List using foldLeft" $ do
+      productFoldLeft [1..200] `shouldBe` foldLeft [1..200] 1 (*)
+
+  describe "reverseFold" $ do
+    it "should reverse a list" $ do
+      reverseFold [1..5] `shouldBe` reverse [1..5]
+
+  describe "appendFold" $ do
+    it "should append a list to another" $ do
+      appendFold [1..5] [6..10] `shouldBe` [1..10]
+    it "should append an empty list to another list" $ do
+      appendFold [1..5] [] `shouldBe` [1..5]
+    it "should append a list to an empty list" $ do
+      appendFold [] [1..5] `shouldBe` [1..5]
+
+  describe "concatViaFold" $ do
+    it "should concatenate a list of lists" $ do
+      concatViaFold [[1..4], [5..8], [], [9..12]] `shouldBe` [1..12]
+
+  describe "addOne" $ do
+    it "should add 1 to each item of a list" $ do
+      addOne [1..4] `shouldBe` [2..5]
+
+  describe "doubleToString" $ do
+    it "should turn a list of doubles to strings" $ do
+      doubleToString [1.0, 2.0, 3.0] `shouldBe` ["1.0", "2.0", "3.0"]
+
+  describe "map" $ do
+    it "should apply a function to each element of a list while maintaining the list structure" $ do
+      map1 (+2) [1..5] `shouldBe` [3..7]
+
+  describe "filter" $ do
+    it "should remove all odd numbers from a list" $ do
+      filter1 even [1..5] `shouldBe` [2,4]
